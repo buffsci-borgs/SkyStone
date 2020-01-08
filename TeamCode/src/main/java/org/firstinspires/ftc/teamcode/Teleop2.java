@@ -34,7 +34,7 @@ public class Teleop2 extends OpMode {
         capstoneMotor = hardwareMap.get(DcMotor.class, "capstoneMotor");
         leadScrewMotor2 = hardwareMap.get(DcMotor.class, "leadScrewMotor2"); // foundation motor --> leadScrewMotor2
 
-
+        leadScrewMotor.setDirection(DcMotor.Direction.REVERSE);
 
         rfMotor.setDirection(DcMotor.Direction.REVERSE);
         rbMotor.setDirection(DcMotor.Direction.REVERSE);

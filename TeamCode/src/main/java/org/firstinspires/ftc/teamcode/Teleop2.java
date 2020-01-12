@@ -97,11 +97,11 @@ public class Teleop2 extends OpMode {
         }
 
         if(gamepad2.right_bumper){
-            armServo.setPosition(1);
+            armServo.setPosition(1);  // closing arm
         }
         //This is release point
         if(gamepad2.left_bumper){
-            armServo.setPosition(.25);
+            armServo.setPosition(.25);  // opening arm
         }
 
 

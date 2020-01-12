@@ -51,12 +51,12 @@ public class RedPlatformAuto extends LinearOpMode {
 
         driveForward(.75, 500);
         driveRight(.75, 750);
-        driveForward(.50, 500);
+        driveForward(.50, 400);
         sleep(1000);
         hookClose();
-        driveBackward(.5, 2750);
+        driveBackward(.5, 2700);
         hookOpen();
-        driveLeft(.8, 3500);
+        driveLeft(.8, 3700);
     }
 
     public void hookClose(){

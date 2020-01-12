@@ -48,15 +48,14 @@ public class BluePlatformAuto extends LinearOpMode {
         //wait until play button is pressed
         waitForStart();
 
-
         driveForward(.75, 500);
         driveLeft(.75, 750);
-        driveForward(.50, 500);
+        driveForward(.50, 400);
         sleep(1000);
         hookClose();
-        driveBackward(.5, 2750);
+        driveBackward(.5, 2700);
         hookOpen();
-        driveRight(.8, 3500);
+        driveRight(.8, 3700);
     }
 
     public void hookClose(){

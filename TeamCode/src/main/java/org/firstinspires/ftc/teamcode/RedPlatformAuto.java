@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@Autonomous(name="AutoRight", group = "Red Player")
-public class Auto1 extends LinearOpMode {
+@Autonomous(name="Red Platform Auto", group = "Red Player")
+public class RedPlatformAuto extends LinearOpMode {
 
     Servo capstoneServo, armServo, hookServoLeft, hookServoRight;
 
@@ -16,8 +16,7 @@ public class Auto1 extends LinearOpMode {
             rbMotor,
             gearTrackMotor,
             leadScrewMotor,
-            capstoneMotor,
-            foundationMotor;
+            capstoneMotor;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -34,11 +33,12 @@ public class Auto1 extends LinearOpMode {
         gearTrackMotor = hardwareMap.get(DcMotor.class, "gearTrackMotor");
         leadScrewMotor = hardwareMap.get(DcMotor.class, "leadScrewMotor");
         capstoneMotor = hardwareMap.get(DcMotor.class, "capstoneMotor");
-        foundationMotor = hardwareMap.get(DcMotor.class, "foundationMotor");
 
 
         armServo = hardwareMap.servo.get("arm_servo");
         capstoneServo = hardwareMap.servo.get("capstoneServo");
+        hookServoLeft = hardwareMap.servo.get("hookServoLeft");
+        hookServoRight = hardwareMap.servo.get("hookServoRight");
 
         armServo.setPosition(1);
         capstoneServo.setPosition(0);
@@ -49,10 +49,26 @@ public class Auto1 extends LinearOpMode {
         waitForStart();
 
 
-        driveRight(1, 2500);
-
+        driveForward(.75, 500);
+        driveRight(.75, 750);
+        driveForward(.50, 500);
+        sleep(1000);
+        hookClose();
+        driveBackward(.5, 2750);
+        hookOpen();
+        driveLeft(.8, 3500);
     }
 
+    public void hookClose(){
+        hookServoRight.setPosition(0);  //0--> close .40-->open
+        hookServoLeft.setPosition(1);   //1-->close 0-->open
+        sleep(1000);
+    }
+    public void hookOpen(){
+        hookServoRight.setPosition(0.40);  //0--> close .40-->open
+        hookServoLeft.setPosition(0);   //1-->close 0-->open
+        sleep(1000);
+    }
     //base drive
     public void driveForward(double power, int milliseconds){
         lfMotor.setPower(power);

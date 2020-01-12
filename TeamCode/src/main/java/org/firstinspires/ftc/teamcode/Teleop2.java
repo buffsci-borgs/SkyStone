@@ -71,8 +71,8 @@ public class Teleop2 extends OpMode {
        // foundationMotor.setPower(-gamepad2.left_trigger);
 
         if(gamepad1.a) {
-            hookServoRight.setPosition(0);
-            hookServoLeft.setPosition(1);
+            hookServoRight.setPosition(0);  //0--> close .40-->open
+            hookServoLeft.setPosition(1);   //1-->close 0-->open
         }
         if(gamepad1.b){
             hookServoRight.setPosition(.40);

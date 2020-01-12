@@ -5,11 +5,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 
-@Autonomous(name="AutoLeft", group = "Blue Player")
-public class AutonomousDrive2 extends LinearOpMode {
+@Autonomous(name="AutoRight", group = "Red Player")
+public class Auto1 extends LinearOpMode {
 
-    Servo armServo,
-            capstoneServo;
+    Servo capstoneServo, armServo, hookServoLeft, hookServoRight;
 
     public DcMotor lfMotor,
             lbMotor,
@@ -27,10 +26,10 @@ public class AutonomousDrive2 extends LinearOpMode {
         rfMotor = hardwareMap.get(DcMotor.class, "frontRight");  //1
         rbMotor = hardwareMap.get(DcMotor.class, "backRight");  // 3
 
-        rfMotor.setDirection(DcMotor.Direction.FORWARD);
-        rbMotor.setDirection(DcMotor.Direction.FORWARD);
-        lfMotor.setDirection(DcMotor.Direction.REVERSE);
-        lbMotor.setDirection(DcMotor.Direction.REVERSE);
+        rfMotor.setDirection(DcMotor.Direction.REVERSE);
+        rbMotor.setDirection(DcMotor.Direction.REVERSE);
+        lfMotor.setDirection(DcMotor.Direction.FORWARD);
+        lbMotor.setDirection(DcMotor.Direction.FORWARD);
 
         gearTrackMotor = hardwareMap.get(DcMotor.class, "gearTrackMotor");
         leadScrewMotor = hardwareMap.get(DcMotor.class, "leadScrewMotor");
@@ -43,13 +42,14 @@ public class AutonomousDrive2 extends LinearOpMode {
 
         armServo.setPosition(1);
         capstoneServo.setPosition(0);
+        hookServoLeft.setPosition(0);
+        hookServoRight.setPosition(.40);
 
         //wait until play button is pressed
         waitForStart();
 
-        driveLeft(1, 2500);
 
-
+        driveRight(1, 2500);
 
     }
 

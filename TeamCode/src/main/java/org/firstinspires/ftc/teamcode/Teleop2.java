@@ -7,13 +7,13 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-@TeleOp(name="Drive Test2", group="Iterative OpMode")
+@TeleOp(name="Drive OP", group="Iterative OpMode")
 public class Teleop2 extends OpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    Servo capstoneServo, armServo;
-    public DcMotor lfMotor, lbMotor, rfMotor, rbMotor, gearTrackMotor, leadScrewMotor, leadScrewMotor2,
+    Servo capstoneServo, armServo, hookServoLeft, hookServoRight;
+    public DcMotor lfMotor, lbMotor, rfMotor, rbMotor, gearTrackMotor, leadScrewMotor,
                             capstoneMotor;
 
 
@@ -32,7 +32,7 @@ public class Teleop2 extends OpMode {
         gearTrackMotor = hardwareMap.get(DcMotor.class, "gearTrackMotor");
         leadScrewMotor = hardwareMap.get(DcMotor.class, "leadScrewMotor");
         capstoneMotor = hardwareMap.get(DcMotor.class, "capstoneMotor");
-        leadScrewMotor2 = hardwareMap.get(DcMotor.class, "leadScrewMotor2"); // foundation motor --> leadScrewMotor2
+
 
         leadScrewMotor.setDirection(DcMotor.Direction.REVERSE);
 
@@ -43,15 +43,21 @@ public class Teleop2 extends OpMode {
         //Initializing servos       names are from Controller app
         armServo = hardwareMap.servo.get("arm_servo");
         capstoneServo = hardwareMap.servo.get("capstoneServo");
+        hookServoLeft = hardwareMap.servo.get("hookServoLeft");
+        hookServoRight = hardwareMap.servo.get("hookServoRight");
+
 
         armServo.setPosition(1);
         capstoneServo.setPosition(0);
+        hookServoLeft.setPosition(0);
+        hookServoRight.setPosition(.40);
     }
 
     @Override
     public void start() {
         runtime.reset();
     }
+
 
     @Override
     public void loop() {
@@ -64,11 +70,17 @@ public class Teleop2 extends OpMode {
       //  foundationMotor.setPower(gamepad2.right_trigger);
        // foundationMotor.setPower(-gamepad2.left_trigger);
 
-
+        if(gamepad1.a) {
+            hookServoRight.setPosition(0);
+            hookServoLeft.setPosition(1);
+        }
+        if(gamepad1.b){
+            hookServoRight.setPosition(.40);
+            hookServoLeft.setPosition(0);
+        }
 
         //Setting powers for leadScrewMotor, gearTrackMotor
         leadScrewMotor.setPower(gamepad2.right_stick_y);
-        leadScrewMotor2.setPower(gamepad2.right_stick_y);
 
         gearTrackMotor.setPower(0.75*gamepad2.left_stick_y);
         //capstone motor
